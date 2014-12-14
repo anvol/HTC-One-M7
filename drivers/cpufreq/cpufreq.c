@@ -45,7 +45,6 @@ static DEFINE_SPINLOCK(cpufreq_driver_lock);
 
 static DEFINE_PER_CPU(int, cpufreq_policy_cpu);
 static DEFINE_PER_CPU(struct rw_semaphore, cpu_policy_rwsem);
-DEFINE_PER_CPU(int, cpufreq_init_done);
 
 #define lock_policy_rwsem(mode, cpu)					\
 int lock_policy_rwsem_##mode						\
@@ -235,22 +234,6 @@ void cpufreq_notify_transition(struct cpufreq_freqs *freqs, unsigned int state)
 }
 EXPORT_SYMBOL_GPL(cpufreq_notify_transition);
 
-extern unsigned long acpuclk_get_rate(int cpu);
-void trace_cpu_up_frequency (unsigned int cpu)
-{
-	
-	unsigned int freq = 0;
-	freq = acpuclk_get_rate(cpu);
-
-	trace_cpu_frequency (freq, cpu);
-}
-EXPORT_SYMBOL_GPL(trace_cpu_up_frequency);
-
-void trace_cpu_down_frequency (unsigned int cpu)
-{
-	trace_cpu_frequency (0, cpu);
-}
-EXPORT_SYMBOL_GPL(trace_cpu_down_frequency);
 
 void cpufreq_notify_utilization(struct cpufreq_policy *policy,
 		unsigned int util)
@@ -927,7 +910,6 @@ static int cpufreq_add_dev(struct device *dev, struct subsys_interface *sif)
 	kobject_uevent(&policy->kobj, KOBJ_ADD);
 	module_put(cpufreq_driver->owner);
 	pr_debug("initialization complete\n");
-	per_cpu(cpufreq_init_done, cpu) = 1;
 
 	return 0;
 
