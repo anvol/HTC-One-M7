@@ -1396,12 +1396,6 @@ retry_private:
 
 	if (ret && (rt_mutex_owner(&q.pi_state->pi_mutex) == current))
 		rt_mutex_unlock(&q.pi_state->pi_mutex);
-
-	if (match_futex(&q.key, &key2)) {
-		ret = -EINVAL;
-		goto out_put_keys;
-	}
-
 	
 	unqueue_me_pi(&q);
 
