@@ -7504,10 +7504,10 @@ static void __init dlxp_ul_cdp_init(void)
         if(!cpu_is_krait_v1())
                 set_two_phase_freq(1134000);
 #endif
-	set_input_event_min_freq_by_cpu(1, 1134000);
-	set_input_event_min_freq_by_cpu(2, 1026000);
-	set_input_event_min_freq_by_cpu(3, 810000);
-	set_input_event_min_freq_by_cpu(4, 810000);
+//	set_input_event_min_freq_by_cpu(1, 1134000);
+//	set_input_event_min_freq_by_cpu(2, 1026000);
+//	set_input_event_min_freq_by_cpu(3, 810000);
+//	set_input_event_min_freq_by_cpu(4, 810000);
 
 	
 	

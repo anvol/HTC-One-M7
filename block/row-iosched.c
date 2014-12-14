@@ -367,9 +367,7 @@ static void row_add_request(struct request_queue *q,
 			rqueue->idle_data.begin_idling = false;
 			return;
 		}
-
-		if ((bv_page_flags & (1L << PG_readahead)) ||
-		    (diff_ms < rd->rd_idle_data.freq_ms)) {
+		if (diff_ms < rd->rd_idle_data.freq_ms) {
 			rqueue->idle_data.begin_idling = true;
 			row_log_rowq(rd, rqueue->prio, "Enable idling");
 		} else {
@@ -1095,3 +1093,4 @@ module_exit(row_exit);
 
 MODULE_LICENSE("GPLv2");
 MODULE_DESCRIPTION("Read Over Write IO scheduler");
+
