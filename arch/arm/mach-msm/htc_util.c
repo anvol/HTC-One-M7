@@ -153,6 +153,7 @@ static u64 get_iowait_time(int cpu)
 extern void htc_print_active_wake_locks(int type);
 extern void htc_show_interrupts(void);
 #ifdef CONFIG_DEBUG_KERNEL
+extern void htc_show_interrupts(void);
 extern void htc_timer_stats_onoff(char onoff);
 extern void htc_timer_stats_show(u16 water_mark);
 #endif
